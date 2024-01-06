@@ -8,6 +8,10 @@ from selenium.webdriver.chrome.service import Service
 
 import time
 
+import csv
+
+import unicodedata
+
 from openpyxl import Workbook
 from openpyxl import load_workbook
 
@@ -43,7 +47,30 @@ workNames = driver.find_elements(By.CLASS_NAME, "name.d-inline-block")
 classTime = driver.find_elements(By.XPATH, "//div[@class='row']/div[@class='col-11']")
 className = driver.find_elements(By.XPATH, "//div[@class='row mt-1']/div[@class='col-11']/a")
 
+homeworks = []
 time.sleep(1)
+for data in range(workNames):
+    homeworks.append(workNames[data]+','+className[data]+','+classTime[data])
+
+
+
+
+with open(r'D:\\VSCODE_Programmes\\automationProject\\workData.csv', 'w', newline='') as csvF:
+    file = csv.writer(csvF, delimiter="$")
+    for i in range(len(homeworks)):
+        print("doeshappen")
+        try:
+            file.writerow(homeworks[i])
+        except:
+            try:
+                file.writerow(unicodedata.normalize('NFKD',homeworks[i]).encode("ascii", 'ignore'))
+            except:
+                print("noneOfThemWorkError")
+        else:
+            print("text was encoded")
+
+csvF.close()
+
 
 for texts in classTime:
     print(texts.text)
@@ -54,8 +81,7 @@ for texts in className:
 for texts in workNames:
     print(texts.text)
 
-
-
+ 
 
 
 input()
