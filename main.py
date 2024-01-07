@@ -16,6 +16,8 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 
 import userInformation as usrI
+
+"""
 usrName = usrI.username
 passW = usrI.password
 
@@ -23,7 +25,7 @@ service = Service()
 option = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=service, options=option)
 
-url = "https://id2.rtu.lv/openam/UI/Login?locale=lv&goto=https%3A%2F%2Festudijas.rtu.lv"
+url = usrI.userURL
 driver.get(url)
 time.sleep(1)
 
@@ -46,16 +48,44 @@ time.sleep(5)
 workNames = driver.find_elements(By.CLASS_NAME, "name.d-inline-block")
 classTime = driver.find_elements(By.XPATH, "//div[@class='row']/div[@class='col-11']")
 className = driver.find_elements(By.XPATH, "//div[@class='row mt-1']/div[@class='col-11']/a")
+"""
 
+workNames = usrI.testWorks
+className = usrI.testClasses
+classTime = usrI.testTimes
+
+filePath = usrI.filePathXlsx
+wb = load_workbook(filename = filePath)
+ws=wb.active
+
+#myworkbook=openpyxl.load_workbook()
+#worksheet=myworkbook.wb('Sheet1')
+for i in range(len(workNames)):
+        try:
+            textWork = unicodedata.normalize("NFKD", workNames[i]).encode("ascii", "ignore")
+            textClass = unicodedata.normalize("NFKD", className[i]).encode("ascii", "ignore")
+            textTime = unicodedata.normalize("NFKD", classTime[i]).encode("ascii", "ignore")
+            ws['B'+ str(i+1)] = str(textWork)
+            ws['C'+ str(i+1)] = str(textClass)
+            ws['D'+ str(i+1)] = str(textTime)
+            #cellref=worksheet.cell(row=i, column=4) cellref.value=
+        except:
+            print("oops with the xlsx")
+#wb2 = Workbook()
+wb.save(filePath)
+#'D:\VSCODE_Programmes\Projects\Lists\prr\data2.xlsx'
+wb.close()
+
+"""
 homeworks = []
 time.sleep(1)
 for data in range(workNames):
     homeworks.append(workNames[data]+','+className[data]+','+classTime[data])
+"""
 
-
-
-
-with open(r'D:\\VSCODE_Programmes\\automationProject\\workData.csv', 'w', newline='') as csvF:
+"""
+filepathcsv = usrI.filePathcsv
+with open(, 'w', newline='') as csvF:
     file = csv.writer(csvF, delimiter="$")
     for i in range(len(homeworks)):
         print("doeshappen")
@@ -71,7 +101,6 @@ with open(r'D:\\VSCODE_Programmes\\automationProject\\workData.csv', 'w', newlin
 
 csvF.close()
 
-
 for texts in classTime:
     print(texts.text)
 
@@ -80,10 +109,9 @@ for texts in className:
 
 for texts in workNames:
     print(texts.text)
+"""
 
- 
 
-
-input()
-driver.close()
+#input()
+#driver.close()
 
