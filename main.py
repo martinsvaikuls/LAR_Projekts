@@ -12,8 +12,8 @@ import csv
 
 import unicodedata
 
-from openpyxl import Workbook
-from openpyxl import load_workbook
+from openpyxl import Workbook, load_workbook
+
 
 import userInformation as usrI
 
@@ -49,28 +49,37 @@ workNames = driver.find_elements(By.CLASS_NAME, "name.d-inline-block")
 classTime = driver.find_elements(By.XPATH, "//div[@class='row']/div[@class='col-11']")
 className = driver.find_elements(By.XPATH, "//div[@class='row mt-1']/div[@class='col-11']/a")
 """
-
+######
 workNames = usrI.testWorks
 className = usrI.testClasses
 classTime = usrI.testTimes
+######
 
 filePath = usrI.filePathXlsx
-wb = load_workbook(filename = filePath)
-ws=wb.active
+wb = load_workbook(filePath)
+ws = wb.active
+maxRows = ws.max_row
+oldWorkNames = []
+oldClassName = []
+oldClassTime = []
 
 #myworkbook=openpyxl.load_workbook()
 #worksheet=myworkbook.wb('Sheet1')
 for i in range(len(workNames)):
-        try:
-            textWork = unicodedata.normalize("NFKD", workNames[i]).encode("ascii", "ignore")
-            textClass = unicodedata.normalize("NFKD", className[i]).encode("ascii", "ignore")
-            textTime = unicodedata.normalize("NFKD", classTime[i]).encode("ascii", "ignore")
+    workNames[i] = unicodedata.normalize("NFKD", workNames[i]).encode("ascii", "ignore")
+    className[i] = unicodedata.normalize("NFKD", className[i]).encode("ascii", "ignore")
+    classTime[i] = unicodedata.normalize("NFKD", classTime[i]).encode("ascii", "ignore")
+
+
+"""
+            try:
             ws['B'+ str(i+1)] = str(textWork)
             ws['C'+ str(i+1)] = str(textClass)
             ws['D'+ str(i+1)] = str(textTime)
             #cellref=worksheet.cell(row=i, column=4) cellref.value=
         except:
             print("oops with the xlsx")
+"""
 #wb2 = Workbook()
 wb.save(filePath)
 #'D:\VSCODE_Programmes\Projects\Lists\prr\data2.xlsx'
