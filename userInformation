@@ -1,0 +1,16 @@
+##informācija par lietotāju
+password = ""
+username = ""
+
+
+##kur saglabāt informāciju
+filePathXlsx = r''
+filePathcsv = r''
+##rtu mācību saite
+userURL = "https://id2.rtu.lv/openam/UI/Login?locale=lv&goto=https%3A%2F%2Festudijas.rtu.lv"
+
+
+telegramName = "Telegram"
+
+##in progress
+classes = []
