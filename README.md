@@ -13,7 +13,7 @@ Idejas koda izveidošanas plāns:
   Programmas darbības pabeigtas
 
 ## Lietotās python bibliotēkas
-#Datu iegūšana 
+### Datu iegūšana 
 
 1. selenium
 Selenium tika lietots, jo vajag ielogoties saitē, ko ar BeautifulSoup 4 nav iespējams darīt
@@ -54,5 +54,13 @@ Tā nav īsti bibliotēka, bet vieta kur saglabāt lietotāja informāciju, piem
 ### Video, kur norādīts kā programma strādā
 
 
-## Esošie kļūdas/nepilnības kodā!
-Lietojot pywinauto vismaz, kā tika uzzināts nav iespējam manipulēt ar lietotni "Telegram", tāpēc programma nav dinamiska, bet statiska, lietotnei "Telegram" vajag atrasties kreisajā stūrī un 
+## Esošās kļūdas/nepilnības kodā!
+  - Nav zināms, kā programma darbosies ja lietotājs vēlās lietot citu aplikāciju
+  - Paziņojums tiek nosūtīts uz 1. saraksti Telegram aplikācijā
+  - Dati tiek saglabāti tikai xlsx (vajadzētu pievienot .txt)
+
+## Iespējamie papildinājumi!
+  - Lietotājs var izvēlēties, lai programma nerādītu līdz kuram datumam, bet cik dienas ir palikušas no šīs dienas.
+  - Programma pārbauda, vai mājas darbs jau ir izpildīts, ja tas ir tad to nenorāda.
+  - Programma ar kuras palīdzību var nosūtīt mājas darbus.
+  - ...
