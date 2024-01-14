@@ -14,15 +14,18 @@ Idejas koda izveidošanas plāns:
 
 ## Lietotās python bibliotēkas
 #Datu iegūšana 
+
 1. selenium
 Selenium tika lietots, jo vajag ielogoties saitē, ko ar BeautifulSoup 4 nav iespējams darīt
 Selenium pārvietojas pa tīmekli un spēj atrast html elementus pēc Xpath, klasēm, id, attribūtiem, ar ko varēja atrast mājas darbu datus
 
 #Datu saglabāšana
+
 2. openpyxl
 Ar openpyxl bibliotēku var apstrādāt .xlsx failus, kur tika saglabāti mājas darbu dati kā arī vēlāk nolasīti
 
 #Darbības ar aplikāciju
+
 3. pywinauto
 pywinauto nebija iespējas daudz lietot, jo mana izvēlētā lietotne nevar būt manipulēta ar pywinauto bibliotēku,
 šī bibliotēka tika lietota, lai atvērtu pašu aplikāciju un lietotu peli un klaviatūru
@@ -35,6 +38,7 @@ bibliotēka tiek lietota lai mijiedarbotos ar Windows OS
 ar šo bibliotēku programma pārvietoja un palielināja telegram aplikāciju
 
 #Palīgbibliotēkas
+
 6. sys
 Ja telegram aplikācija neveras vaļā, tad programma pārstāj darboties sys.exit()
 
