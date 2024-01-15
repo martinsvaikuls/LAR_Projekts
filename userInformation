@@ -2,15 +2,22 @@
 password = ""
 username = ""
 
-
-##kur saglabāt informāciju
+##kur saglabāt informāciju, Path
 filePathXlsx = r''
-filePathcsv = r''
+"""
+!
+Path jābūt piem,
+C:\Users\User\Desktop\file.xlsx
+"""
+
 ##rtu mācību saite
 userURL = "https://id2.rtu.lv/openam/UI/Login?locale=lv&goto=https%3A%2F%2Festudijas.rtu.lv"
 
-
-telegramName = "Telegram"
+##Aplikācija un tās Path
+appName = ""
+pathToApp = r""
 
 ##in progress
+##Nav vajadzības aiztikt nākošo daļu
 classes = []
+filePathcsv = r''
