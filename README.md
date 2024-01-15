@@ -51,18 +51,23 @@ Tā nav īsti bibliotēka, bet vieta kur saglabāt lietotāja informāciju, piem
 
 ## Programmas izmantošana
 1. Izlasīt esošās nepilnības kodā
-2. Ievadīt lietotāja informāciju "bibliotēkā" userInformation.py, kura atrodas tajā pašā mapē, kur atrodas main.py
-3. Aplikācijā telegram novietot terzēšanas saraksti kā pirmo no rindām, ja tajā vēlams nosūtīt informāciju.
-4. Uzsākt programmu un aiziet uztaisīt tēju/kafiju (programma aizņem ~3min)
+2. Izveidot jaunu .xlsx failu
+3. Izveidot un ievadīt lietotāja informāciju "bibliotēkā" userInformation.py, kura atrodas tajā pašā mapē, kur atrodas main.py
+4. Aplikācijā telegram novietot terzēšanas saraksti kā pirmo no rindām, ja tajā vēlams nosūtīt informāciju.
+5. Telegram saskarne (angļu val. interface) ir uz 125%
+6. Uzsākt programmu un aiziet uztaisīt tēju/kafiju (programma aizņem ~3min)
+
 
 ### Video, kur norādīts kā programma strādā
-
+https://youtu.be/LVsoKAMpAGs
 
 ## Esošās kļūdas/nepilnības kodā!
   - Nav zināms, kā programma darbosies ja lietotājs vēlās lietot citu aplikāciju
   - Paziņojums tiek nosūtīts uz 1. saraksti Telegram aplikācijā
-  - Dati tiek saglabāti tikai xlsx (vajadzētu pievienot .txt)
+  - Paziņojums tiek nosūtīts ļoti lēni
   - Ja telegram ir atvērts un citas vietnes ir priekšplānā tad tajā netiks ievietota informācija
+  - Dati tiek saglabāti tikai xlsx (vajadzētu pievienot .txt)
+  - Tiek lietots userInformation.py nevis config fails
 
 ## Iespējamie papildinājumi!
   - Lietotājs var izvēlēties, lai programma nerādītu līdz kuram datumam, bet cik dienas ir palikušas no šīs dienas.
