@@ -7,8 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.service import Service
 
-from pywinauto.application import Application
-
 import time
 
 ##datu uzgalabašana
@@ -82,13 +80,17 @@ oldClassTime = []
 
 ##iegūt jau esošos datus 
 for i in range(2,maxRows+1):
-    oldWorkNames.append(str(ws['B'+ str(i)].value)) 
-    oldClassName.append(str(ws['C'+ str(i)].value))
-    oldClassTime.append(str(ws['D'+ str(i)].value))
-    print("a")
+    if type(ws['B'+ str(i)].value) != type(None):
+        oldWorkNames.append(str(ws['B'+ str(i)].value)) 
+        oldClassName.append(str(ws['C'+ str(i)].value))
+        oldClassTime.append(str(ws['D'+ str(i)].value))
+    ws['B'+ str(i)] = None
+    ws['C'+ str(i)] = None
+    ws['D'+ str(i)] = None
+    #print("a")
 ###
-print(oldClassName, oldClassTime, oldWorkNames)
-
+#print(oldClassName, oldClassTime, oldWorkNames)
+print("Mājas darbu dati iegūti")
 ##uzzināt kuri dati ir jauni un kuri vairs nepastāv
 #jauni dati
 newName = []
@@ -126,7 +128,7 @@ else:
 
 ##ievietot datus excelī
 dataAmount = len(workNames)
-print("len of many", dataAmount)
+#print("length of array containing classes", dataAmount)
 
 for i in range(dataAmount):
     try:
@@ -141,26 +143,50 @@ for i in range(dataAmount):
 wb.save(filePath)
 #'D:\VSCODE_Programmes\Projects\Lists\prr\data2.xlsx'
 wb.close()
-
+print("Mājas darbu dati saglabāti")
 driver.close()
 ###another program
 import pywinauto
 from pywinauto import win32functions
-import win32api
+from pywinauto.application import Application
+import win32gui
 
 from pywinauto import keyboard, mouse
 
 
 ##pārbaudīt vai programma jau ir atvērta
 import pyautogui
+import sys
 
-app = "Telegram"
-if app not in pyautogui.getAllWindows():
-    app = Application(backend = "uia").start(r"D:\Programmas\Telegram\Telegram Desktop\Telegram.exe")
+pathToApp = usrI.pathToApp
+application = usrI.appName
+
+appIsOn = False
+for x in pyautogui.getAllWindows():
+    if application == x.title:
+        appIsOn = True
+timeStart = time.time()
+if appIsOn == False:
+    print("Telegram Tiek atvērts")
+    app = Application(backend = "uia").start(pathToApp)
+    while appIsOn == False:
+        if time.time() - timeStart > 6.0:
+            print("ErrorTimeOut")
+            sys.exit(0)
+        for x in pyautogui.getAllWindows():
+            if application == x.title:
+                appIsOn = True
+            if appIsOn == True:
+                break
+        time.sleep(0.2)
+
+time.sleep(1)
+hwnd = win32gui.FindWindow(None, application)
+win32gui.MoveWindow(hwnd, 0, 0, 960, 1040, True)
 
 ######
-time.sleep(8)
-pywinauto.mouse.click(coords = (231, 187))
+time.sleep(3)
+pywinauto.mouse.click(coords = (128, 180))
 time.sleep(1)
 pywinauto.mouse.click(coords = (641, 1007))
 pywinauto.keyboard.send_keys("jaunie darbi")
@@ -227,61 +253,3 @@ pywinauto.keyboard.send_keys('{ENTER}')
 ######
 
 time.sleep(1)
-
-
-
-
-##izveidot vienu texta līniju nevis lietot trīs masīvus
-"""
-homeworks = []
-time.sleep(1)
-for data in range(workNames):
-    homeworks.append(workNames[data]+','+className[data]+','+classTime[data])
-"""
-###
-
-##pārveidot jauniegūtos datus, lai tos varētu ievietot csv
-"""
-for i in range(len(workNames)):
-    workNames[i] = unicodedata.normalize("NFKD", workNames[i]).encode("ascii", "ignore")
-    className[i] = unicodedata.normalize("NFKD", className[i]).encode("ascii", "ignore")
-    classTime[i] = unicodedata.normalize("NFKD", classTime[i]).encode("ascii", "ignore")
-"""
-###
-
-##! ievietot datus csv failā
-"""
-filepathcsv = usrI.filePathcsv
-with open(, 'w', newline='') as csvF:
-    file = csv.writer(csvF, delimiter="$")
-    for i in range(len(homeworks)):
-        print("doeshappen")
-        try:
-            file.writerow(homeworks[i])
-        except:
-            try:
-                file.writerow(unicodedata.normalize('NFKD',homeworks[i]).encode("ascii", 'ignore'))
-            except:
-                print("noneOfThemWorkError")
-        else:
-            print("text was encoded")
-
-csvF.close()
-
-"""
-###!
-"""
-for texts in classTime:
-    print(texts.text)
-
-for texts in className:
-    print(texts.text)
-
-for texts in workNames:
-    print(texts.text)
-"""
-
-
-#input()
-
-
